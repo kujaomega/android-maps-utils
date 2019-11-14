@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -19,15 +17,12 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.algo.Algorithm
 import com.google.maps.android.clustering.algo.NonHierarchicalViewBasedAlgorithm
-import com.google.maps.android.utils.demo.ClusteringViewModel
 import com.google.maps.android.utils.demo.R
 import com.google.maps.android.utils.demo.binding.FragmentDataBindingComponent
 import com.google.maps.android.utils.demo.databinding.FragmentMapsBinding
-import com.google.maps.android.utils.demo.dependencyiInjection.Injectable
 import com.google.maps.android.utils.demo.maps.MarkerItem
 import com.google.maps.android.utils.demo.ui.map.MapsViewModel
 import com.google.maps.android.utils.demo.util.autoCleared
-import javax.inject.Inject
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback{
