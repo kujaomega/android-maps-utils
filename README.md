@@ -1,28 +1,40 @@
-[![Build Status](https://travis-ci.org/googlemaps/android-maps-utils.svg?branch=master)](https://travis-ci.org/googlemaps/android-maps-utils)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.google.maps.android/android-maps-utils/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.google.maps.android/android-maps-utils)
-![GitHub contributors](https://img.shields.io/github/contributors/googlemaps/android-maps-utils?color=green)
+# Error reproduction on setOnClusterItemClickListener: On cluster Item clickListener error
 
-# Google Maps Android API utility library
+The following code is to reproduce the errors in:
+https://issuetracker.google.com/issues/144150368
+https://stackoverflow.com/questions/58768704/setonclusteritemclicklistener-on-cluster-item-clicklistener-error
+https://github.com/googlemaps/android-maps-utils/issues/580
 
-This open-source library contains utilities that are useful for a wide
-range of applications using the [Google Maps Android API][android-site].
+The code taken as a base to reproduce the error, is the following: https://github.com/googlemaps/android-maps-utils
 
-- **Marker clustering** — handles the display of a large number of points
-- **Heat maps** — display a large number of points as a heat map
-- **IconGenerator** — display text on your Markers
-- **Poly decoding and encoding** — compact encoding for paths,
-  interoperability with Maps API web services
-- **Spherical geometry** — for example: computeDistance, computeHeading,
-  computeArea
-- **KML** — displays KML data
-- **GeoJSON** — displays and styles GeoJSON data
+Library details:
 
-<p align="center"><img width="90%" vspace="20" src="https://cloud.githubusercontent.com/assets/1950036/6629704/f57bc6d8-c908-11e4-815a-0d909fe02f99.gif"></p>
+com.google.android.gms:play-services-maps:17.0.0
 
-For more information, check out the detailed guide on the
-[Google Developers site][devsite-guide]. You can also view the generated
-[reference docs][javadoc] for a full list of classes and their methods.
+Device google play services:
+DOOGEE X5 3G: 19.6.29
+motorolla MotoG 3: 19.6.29
 
-[android-site]: https://developer.android.com/training/maps/index.html
-[devsite-guide]: https://developers.google.com/maps/documentation/android-api/utility/
-[javadoc]: http://googlemaps.github.io/android-maps-utils/javadoc/
+This error has not been tested on previous version of Google Play Services
+
+
+To reproduce the problem 100% of times, follow the details:
+
+Use one of the following phones with errors:
+With Aquaris U Plus, Android 7.1.1(16 GB, 2GB RAM) never had this error. Error rate: 0%
+With motorolla MotoG 3,  Android 6.0.1 (8 GB, 1 GB RAM) . Error rate 100%
+DOOGEE X5 3G, Android 6.0 (8 GB, 1 GB RAM) . Error rate 100%
+
+
+1. Open the code with Android Studio
+2. Set up a breakpoint in the line 114 of the com.google.maps.android.utils.demo.ui.map.MapsFragment class. at the "println" of the "clusterItemClickListener" method:
+
+private fun clusterItemClickListener(markerItem: MarkerItem?): Boolean{
+        println("TEST")
+        return false
+    }
+
+3. Run the app in debug mode using the Android physical devices
+4. When the app is running. Click to a cluster Item to go to the breakpoint.
+5. When you get to the breakpoint, wait 4-5 seconds and the error will be thrown.
+

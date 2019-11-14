@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/map_fragment"
-        android:name="com.learnfromashes.eventsapp.ui.map.MapsFragment"
+        android:name="com.google.maps.android.utils.demo.ui.map.MapsFragment"
         tools:layout="@layout/fragment_maps">
     </fragment>
 </navigation>

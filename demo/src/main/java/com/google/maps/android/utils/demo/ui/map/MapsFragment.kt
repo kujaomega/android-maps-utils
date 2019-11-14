@@ -1,4 +1,4 @@
-package com.learnfromashes.eventsapp.ui.map
+package com.google.maps.android.utils.demo.ui.map
 
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -21,7 +21,6 @@ import com.google.maps.android.utils.demo.R
 import com.google.maps.android.utils.demo.binding.FragmentDataBindingComponent
 import com.google.maps.android.utils.demo.databinding.FragmentMapsBinding
 import com.google.maps.android.utils.demo.maps.MarkerItem
-import com.google.maps.android.utils.demo.ui.map.MapsViewModel
 import com.google.maps.android.utils.demo.util.autoCleared
 
 
@@ -101,12 +100,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
         googleMap.setOnMarkerClickListener(clusterManager)
 
         clusterManager?.let {clusterM ->
-            clusterM.setOnClusterItemClickListener{markerItem ->  clusterItemClickListener(markerItem)
+            clusterM.setOnClusterItemClickListener{markerItem ->
+                clusterItemClickListener(markerItem)
             }
 //            clusterM.renderer = EventRenderer(this.context!!, mMap, clusterM)
         }
 
-        val position =((this.clusterManager as ClusterManager).algorithm as NonHierarchicalViewBasedAlgorithm).items.random().position
+        val position =((this.clusterManager as ClusterManager).algorithm as
+                NonHierarchicalViewBasedAlgorithm).items.random().position
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 14f))
 
     }
